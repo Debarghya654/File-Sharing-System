@@ -1,0 +1,4 @@
+go get github.com/aws/aws-sdk-go
+go get github.com/jinzhu/gorm
+go get github.com/lib/pq
+go get github.com/gorilla/mux

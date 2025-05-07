@@ -1,0 +1,7 @@
+CREATE TABLE files (
+    id SERIAL PRIMARY KEY,
+    filename VARCHAR(255) NOT NULL,
+    file_url TEXT NOT NULL,
+    expiry_date TIMESTAMP,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

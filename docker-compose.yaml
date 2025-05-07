@@ -1,0 +1,38 @@
+version: "3.8"
+services:
+  app:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      - DB_HOST=postgres
+      - DB_USER=postgres
+      - DB_PASSWORD=yourpassword
+      - DB_NAME=fileshare
+      - S3_BUCKET=your-s3-bucket-name
+      - AWS_REGION=us-east-1
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:13
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=yourpassword
+      - POSTGRES_DB=fileshare
+    ports:
+      - "5432:5432"
+
+  s3:
+    image: minio/minio
+    environment:
+      MINIO_ACCESS_KEY: minio
+      MINIO_SECRET_KEY: minio123
+    command: server /data
+    ports:
+      - "9000:9000"
+    volumes:
+      - s3_data:/data
+
+volumes:
+  s3_data:
